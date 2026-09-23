@@ -1,0 +1,46 @@
+name: Pipeline CI-CD
+
+# Paso 5: Configurar el evento push
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    # Paso 6: Configurar el runner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Paso 7: Instalar dependencias
+      - name: Instalar dependencias
+        run: npm install
+
+      # Paso 8: Ejecutar pruebas
+      - name: Ejecutar pruebas unitarias
+        run: npm test
+
+      # Paso 9: Construir la aplicacion
+      - name: Construir aplicacion
+        run: npm run build
+
+  deploy:
+    # Paso 10: Configurar el despliegue
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: Simular despliegue a produccion
+        run: |
+          echo "Iniciando despliegue..."
+          echo "Despliegue completado satisfactoriamente."

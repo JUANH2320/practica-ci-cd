@@ -1,0 +1,8 @@
+{
+  "name": "practica-ci-cd",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test.js",
+    "build": "node -e \"console.log('Build completado con exito')\""
+  }
+}
